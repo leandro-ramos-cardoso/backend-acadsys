@@ -7,8 +7,12 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 # Libera CORS para o frontend na Render
-CORS(app, resources={r"/*": {"origins": "https://react-frontend-acadsys.onrender.com"}}, supports_credentials=True)
 
+# MASTER
+# CORS(app, resources={r"/*": {"origins": "https://react-frontend-acadsys.onrender.com"}}, supports_credentials=True)
+
+# DEV
+CORS(app)
 
 # Inicializa banco
 db.init_app(app)
@@ -66,3 +70,7 @@ def deletar_aluno(id):
     db.session.delete(aluno)
     db.session.commit()
     return jsonify({"msg": "Aluno deletado"})
+
+# ... todo o código que você já mandou acima ...
+if __name__ == "__main__":
+    app.run(debug=True)

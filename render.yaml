@@ -6,4 +6,4 @@ services:
     startCommand: gunicorn app:app
     envVars:
       - key: DATABASE_URL
-        value: postgresql://postgress:ZR5VLpYXn9LxfL7SSQxTbOPIoGolu3zd@dpg-d164m5adbo4c73d9deng-a.oregon-postgres.render.com/alunosdb_3fkm
+        value: postgresql://postgres:123456@localhost:5432/alunosdb
