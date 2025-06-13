@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 # Libera CORS para o frontend na Render
-CORS(app, origins=["https://react-frontend-acadsys.onrender.com"])
+CORS(app, resources={r"/*": {"origins": "https://react-frontend-acadsys.onrender.com"}})
 
 # Inicializa banco
 db.init_app(app)
