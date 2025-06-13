@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 # CORS(app, origins=["http://localhost:5173"])
-CORS(app, origins=["https://react-frontend-acadsys.onrender.com"])
+CORS(app)
 
 def create_tables():
     with app.app_context():
