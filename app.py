@@ -4,7 +4,7 @@ from models import db, Aluno
 import config
 
 app = Flask(__name__)
-app.config.from_object(config)
+app.config.from_object(config.Config)
 
 # ✅ CORS liberado apenas para o frontend da Render (seguro)
 CORS(app, origins=["https://react-frontend-acadsys.onrender.com"])
