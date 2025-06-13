@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: flask-api-alunos
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn app:app
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://postgres:123456@localhost:5432/alunosdb
