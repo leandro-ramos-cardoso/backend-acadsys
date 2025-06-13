@@ -4,17 +4,20 @@ from models import db, Aluno
 import config
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = config.DATABASE_URL
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config.from_object(config)
 
+# ✅ CORS liberado apenas para o frontend da Render (seguro)
+CORS(app, origins=["https://react-frontend-acadsys.onrender.com"])
+
+# 🧠 Inicializa o banco
 db.init_app(app)
-# CORS(app, origins=["http://localhost:5173"])
-CORS(app)
 
+# 🔧 Criação das tabelas no primeiro request (só em ambientes controlados)
+@app.before_first_request
 def create_tables():
-    with app.app_context():
-        db.create_all()
+    db.create_all()
 
+# ✅ Endpoints da API
 @app.route("/alunos", methods=["POST"])
 def criar_aluno():
     data = request.json
@@ -58,6 +61,5 @@ def deletar_aluno(id):
     db.session.commit()
     return jsonify({"msg": "Aluno deletado"})
 
-if __name__ == "__main__":
-    create_tables()
-    app.run(debug=True)
+# 🚫 Não roda app.run em produção na Render!
+# Gunicorn que roda isso via `startCommand: gunicorn app:app`
